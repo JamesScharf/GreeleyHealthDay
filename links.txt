@@ -1,0 +1,19 @@
+Helpful links:
+    GOOGLE AUTHORIZATION:
+        Initial info: https://developers.google.com/identity/sign-in/web/devconsole-project
+        Profile info: https://developers.google.com/identity/sign-in/web/people
+
+    PHP LINKS:
+        http://www.w3schools.com/php/
+        http://www.w3schools.com/php/php_syntax.asp
+        http://www.w3schools.com/php/php_variables.asp
+        http://www.w3schools.com/php/php_echo_print.asp
+        http://www.tutorialspoint.com/php/
+        https://www.codecademy.com/tracks/php
+        
+    WAMP: Need for running PHP
+        http://www.wampserver.com/en/
+    
+    
+    MATERIAL DESIGN LITE: It's the framework used.
+        getmdl.io/started/index.html
