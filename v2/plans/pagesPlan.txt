@@ -1,0 +1,25 @@
+PLAN:
+    2 Sections:
+        1. Re-usable scheduling framework
+            a. Hopefully fork and create similar blackboard program
+        2. Greeley Health Day Specific Code: Reliant upon #1
+            -Info specific to the ghd stuff
+
+ORGANIZATION OF PAGES: which page someone can access
+
+    -->WEBMASTER ACCESSABLE:
+        
+        -->PRINCIPAL ACCESSABLE:
+            ºMaster Control Panel (masterPanel.php): 2 more passwords: Remove accounts, change account privilage, empty specific data tables
+           
+           -->SCHEDULER ACCESSABLE:
+                ºScheduling Control Panel (schedulePanel.php): Summary: View whole schedule (organize by different database elements), view classes taught by certain teachers, remove students from classes, remove class, remove teacher, close class
+                
+                -->TEACHER ACCESSABLE:
+                    ºTeacher homepage (teacher.php) where teachers can view their classes and edit their course info (course description)
+                    ºExplanation page for teachers (helpTeachers.php)
+                   
+                   -->STUDENT ACCESSABLE:
+                        ºStudent Main: (studentMain.php): Tabs:
+                            ºStudent-specific schedule
+                            ºClass catalog

@@ -1,0 +1,46 @@
+Created by J. Scharf on 11/3
+
+DESCRIPTIONS OF WHAT EACH DATABASE TABLE IS MEANT TO DO:
+    MAIN DATABASE: GreeleyHealthDay
+    
+        "classInfo":
+            DESCRIPTION: Holds all of the info about each class
+            ACTIONS: 
+                -Teachers can add classes to this
+                -Webpage loads all info of this for the class catolog
+                -Class Name is loaded into the "masterSchedule"
+        
+        "masterSchedule":
+            DESCRIPTION: Holds all schedule-related information including student and teacher location
+            ACTIONS:
+                -Student clicks on "add class" ui element --> Their name, student_id and the class name is added onto master schedule
+                -Can be organized by alphabetical order of an element or class time slot
+                    -Function to spit out class-specific roster (for each "teacher")
+                    -Function to spit out time-specific master roster (to see where everyone is at what time)
+                    -Function to spit out room-specific roster (to know who has been in the room the entire day)
+        
+        "loginInfo":
+            DESCRIPTION: 
+                -Holds all login-related information and privilage info:
+                    -Tier System: Lower the number, higher the privilage
+                        -Tiers:
+                            -1: Webmaster
+                            -2: Principals
+                            -3:Schedulers
+                            -4: Teachers
+                            -5: Students
+
+            ACTIONS:
+                -Login:
+                    -Check whether username+password match
+                        -->If Yes: set session variable to logged in
+                            -->Check privilage: each can view sub-sections
+                                -->If Webmaster: Load master control panel
+                                -->If Principal: Load master control panel+ask for password 2
+                                -->If Scheduler: Load scheduling control panel (print things, view schedules, close classes, create classes, alter class info)
+                                -->If Teacher: Load their class control panel
+                                -->If Student: Load student-accessable section
+                    -User tries to view section:
+                        -->Check privilage
+                            -->Can
+                            -->Cannot
