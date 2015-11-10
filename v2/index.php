@@ -2,8 +2,10 @@
 <html>
     <body>
         <?php
-        echo "test";
 
+include("uifunctions.php");
+$class = "classtest";
+//echoClassInfo($class);
 
         ?>
 

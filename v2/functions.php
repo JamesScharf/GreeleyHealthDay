@@ -171,18 +171,94 @@ function canBeOnPage($user_id)
     } 
 }
 
+//Return teacher of a class
+function getTeacher($class)
+{
+    include("dbForGreeley.php");
+    $results = $mysqli->query("SELECT * FROM classInfo");
+    if($results)
+    {
+        for ($i = 0; $i < $results->num_rows; $i++)
+        {
+            $results->data_seek($i);
+            $row = $results->fetch_assoc();
+            if($row['className'] == $class) //Teacher is teacher of class
+            {
+                $teacher = $row['classTeacher'];
+                return $teacher;
+            }
+        }
+    }
+    
+}
+
 //Add a student to a class
-function addStudentToClass($user_id, $className, $timeSlot, $roomNumber)
+function addStudentToClass($user_id, $className)
 {
     include("dbForGreeley.php");
     //Add student to master schedule
-    $results = $mysqli->query("INSERT INTO masterSchedule(user_id, className, timeSlot, roomNumber) VALUES($user_id', '$className', '$timeSlot', '$roomNumber')"); 
+    $results = $mysqli->query("INSERT INTO masterSchedule(user_id, className) VALUES('$user_id', '$className')"); 
 }
 
-function createClass($user_id, $className, $classTeacher, $classTime, $classDescription, $classCap)
+function createClass($className, $classTeacher, $classTime, $classDescription, $classCap)
 {
     include("dbForGreeley.php");
     $results = $mysqli->query("INSERT INTO classInfo(className, classTeacher, classTime, classDescription, classCap) VALUES('$className', '$classTeacher', '$classTime', '$classDescription', '$classCap')"); 
 }
+
+function orderSchduleBy($thing) //Order the master schedule by the column put in
+{
+    /*Acceptable values for thing: logNumber, user_id, className, timeSlot, roomNumber
+    */
+    include("dbForGreeley.php");
+    $results = $mysqli->query("SELECT * FROM masterSchedule ORDER BY $thing ASC");
+}
+
+//Return the schedule in plaintext of one specific student
+//Is redundent because the UI elements function handles this with UI formatting
+function echoStudentSchedule($user_id)
+{
+    include("dbForGreeley.php");
+    $results = $mysqli->query("SELECT * FROM masterSchedule");
+    if($results)
+    {
+        for ($i = 0; $i < $results->num_rows; $i++)
+        {
+            $results->data_seek($i);
+            $row = $results->fetch_assoc();
+            if($row['user_id'] == $user_id) //user is the same user that I'm looking for
+            {
+                $className = $row['className'];
+                echo "\n";
+                echo getClassInfo($className, "classTime");
+                echo "\n";
+                echo  $className;
+                echo "\n";
+                echo getClassInfo($className, "classTeacher");
+                echo "\n";
+                echo getClassInfo($className, "roomNumber");
+                echo "\n";
+                echo "\n";
+            }
+        }
+    } 
+}
+
+//Return specific information about a class
+function getClassInfo($class, $info) //Acceptable inputs for $info include: logNumber, user_id, className, timeSlot, roomNumber
+{
+    include("dbForGreeley.php");
+    $results = $mysqli->query("SELECT * FROM classInfo");
+    for ($i = 0; $i < $results->num_rows; $i++)
+    {
+        $results->data_seek($i);
+        $row = $results->fetch_assoc();
+        if($row['className'] == $class) //user is the same user that I'm looking for
+        {
+            return $row["$info"];
+        }
+    }
+}
+
 
 ?>
