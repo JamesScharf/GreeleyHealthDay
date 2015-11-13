@@ -60,12 +60,6 @@
                 <section class="mdl-layout__tab-panel" id="fixed-tab-3">
                     <div class="page-content">
                         <!-- Your content goes here -->
-                        <?php
-                        include("functions.php");
-                        include("uifunctions.php");
-                        include("dbForGreeley.php");
-                        echoMasterSchedule();
-                        ?>
                     </div>
                 </section>
             </main>

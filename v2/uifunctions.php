@@ -47,57 +47,27 @@ function echoStudentScheduleUI($user_id)
 
 function echoMasterSchedule()
 {
-    include("dbForGreeley.php");
     include("functions.php");
-    echo "
-    <table class='mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp'>
-      <thead>
-        <tr>
-          <th>Time Slot</th>
-          <th>User ID</th>
-          <th class='mdl-data-table__cell--non-numeric'>Class</th>
-          <th class='mdl-data-table__cell--non-numeric'>Teacher</th>
-        </tr>
-      </thead>
-      <tbody>";
-    $results = $mysqli->query("SELECT * FROM masterSchedule");
-    if($results)
-    {
-        for ($i = 0; $i < $results->num_rows; $i++)
-        {
-            $results->data_seek($i);
-            $row = $results->fetch_assoc();
-            $timeSlot = $row['timeSlot'];
-            $user_id = $row['user_id'];
-            $class = $row['className'];
-            $teacher = getTeacher($class); //Get teachername from other table
-            echo "
-            <tr>
-              <td>$timeSlot</td>
-              <td>$user_id</td>
-              <td class='mdl-data-table__cell--non-numeric'>$class</td>
-              <td class='mdl-data-table__cell--non-numeric'>$teacher</td>
-            </tr>";
-        }
-    }
-    echo "</tbody></table>"; //End the table
+    include("dbForGreeley.php");
+    
+    
 }
 
 function echoClassInfo($class)
 {
     //Get all of the info at first
-    $info = "class_id";
-    $class_id = getClassInfo($class, $info);
-    $info = "className"; 
-    $className = getClassInfo($class, $info);
-    $info = "classTeacher"; //Teacher
-    $classTeacher = getClassInfo($class, $info);
-    $info = "classTime";
-    $classSlot = getClassInfo($class, $info);
-    $info = "classDescription";
-    $classDescription = getClassInfo($class, $info);
-    $info = "classCap";
-    $classCap = getClassInfo($class, $info);
+    $info1 = "class_id";
+    $class_id = getClassInfo($class, $info1);
+    $info2 = "className"; 
+    $className = getClassInfo($class, $info2);
+    $info3 = "classTeacher"; //Teacher
+    $classTeacher = getClassInfo($class, $info3);
+    $info4 = "classTime";
+    $classSlot = getClassInfo($class, $info4);
+    $info5 = "classDescription";
+    $classDescription = getClassInfo($class, $info5);
+    $info6 = "classCap";
+    $classCap = getClassInfo($class, $info6);
     
     //Now dump
     echo "
@@ -123,5 +93,11 @@ function echoClassInfo($class)
           </tr>
       </tbody></table>
       ";
+}
+
+//Show master schedule. WILL work
+function showMaster()
+{
+    
 }
 ?>
