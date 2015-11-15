@@ -61,10 +61,8 @@
                     <div class="page-content">
                         <!-- Your content goes here -->
                         <?php
-                        include("functions.php");
                         include("uifunctions.php");
-                        include("dbForGreeley.php");
-                        echoMasterSchedule();
+                        masterSchedule();
                         ?>
                     </div>
                 </section>

@@ -200,10 +200,10 @@ function addStudentToClass($user_id, $className)
     $results = $mysqli->query("INSERT INTO masterSchedule(user_id, className) VALUES('$user_id', '$className')"); 
 }
 
-function createClass($className, $classTeacher, $classTime, $classDescription, $classCap)
+function createClass($className, $classTeacher, $classTime, $classDescription, $classCap, $classRoom)
 {
     include("dbForGreeley.php");
-    $results = $mysqli->query("INSERT INTO classInfo(className, classTeacher, classTime, classDescription, classCap) VALUES('$className', '$classTeacher', '$classTime', '$classDescription', '$classCap')"); 
+    $results = $mysqli->query("INSERT INTO classInfo(className, classTeacher, classTime, classDescription, classCap, classRoom) VALUES('$className', '$classTeacher', '$classTime', '$classDescription', '$classCap', '$classRoom')"); 
 }
 
 function orderSchduleBy($thing) //Order the master schedule by the column put in

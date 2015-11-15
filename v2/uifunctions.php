@@ -12,7 +12,7 @@ function echoStudentScheduleUI($user_id)
     include("dbForGreeley.php");
     include("functions.php");
     echo "
-    <table class='mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp'>
+    <table class=''>
       <thead>
         <tr>
           <th>Time Slot</th>
@@ -30,8 +30,9 @@ function echoStudentScheduleUI($user_id)
             $row = $results->fetch_assoc();
             if($row['user_id'] == $user_id) //user is the same user that I'm looking for
             {
-                $timeSlot = $row['timeSlot'];
                 $class = $row['className'];
+                $info = "classTime";
+                $timeSlot = getClassInfo($class, $info);
                 $teacher = getTeacher($class); //Get teachername from other table
                 echo "
                 <tr>
@@ -45,11 +46,48 @@ function echoStudentScheduleUI($user_id)
     echo "</tbody></table>"; //End the table
 }
 
-function echoMasterSchedule()
+function masterSchedule()
 {
     include("functions.php");
     include("dbForGreeley.php");
-    
+    echo "
+    <table class='mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp'>
+      <thead>
+        <tr>
+          <th>Time Slot</th>
+          <th>User ID</th>
+          <th class='mdl-data-table__cell--non-numeric'>Class Name</th>
+          <th class='mdl-data-table__cell--non-numeric'>Teacher</th>
+          <th class='mdl-data-table__cell--non-numeric'>Room</th>
+        </tr>
+      </thead>
+      <tbody>"; 
+    $results = $mysqli->query("SELECT * FROM masterSchedule");
+    if($results)
+    {
+        for ($i = 0; $i < $results->num_rows; $i++)
+        {
+            $results->data_seek($i);
+            $row = $results->fetch_assoc();
+            $user_id = $row["user_id"];
+            $className = $row["className"];
+            $info = "classTime";
+            $timeSlot = getClassInfo($className, $info);
+            $info = "classTeacher";
+            $teacher = getClassInfo($className, $info);
+            $info = "classTeacher";
+            $teacher = getClassInfo($className, $info);
+            echo "
+            <tr>
+              <td>$timeSlot</td>
+              <td>$user_id</td>
+              <td class='mdl-data-table__cell--non-numeric'>$className</td>
+              <td class='mdl-data-table__cell--non-numeric'>$teacher</td>
+              <td class='mdl-data-table__cell--non-numeric'>$room</td>
+            </tr>"; 
+        }
+        echo "</tbody></table>";
+    }
     
 }
 
@@ -93,11 +131,5 @@ function echoClassInfo($class)
           </tr>
       </tbody></table>
       ";
-}
-
-//Show master schedule. WILL work
-function showMaster()
-{
-    
 }
 ?>

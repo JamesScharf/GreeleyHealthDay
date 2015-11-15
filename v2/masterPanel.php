@@ -15,8 +15,7 @@
 
     <body>
         <!-- Simple header with fixed tabs. -->
-        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header
-        mdl-layout--fixed-tabs mdl-layout--fixed-drawer">
+        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
             <header class="mdl-layout__header">
                 <div class="mdl-layout__header-row">
                     <!-- Title -->
@@ -24,9 +23,11 @@
                 </div>
                 <!-- Tabs -->
                 <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
-                    <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Users</a>
-                    <a href="#fixed-tab-2" class="mdl-layout__tab">Classes</a>
-                    <a href="#fixed-tab-3" class="mdl-layout__tab">Schedules</a>
+                    <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Schedule</a>
+                    <a href="#fixed-tab-2" class="mdl-layout__tab">Class Information</a>
+                    <a href="#fixed-tab-3" class="mdl-layout__tab">User Information</a>
+                    <a href="#fixed-tab-4" class="mdl-layout__tab">Edit Schedules</a>
+                    <a href="#fixed-tab-5" class="mdl-layout__tab">Create/Remove a Class</a>
                 </div>
             </header>
             <div class="mdl-layout__drawer">
@@ -41,15 +42,42 @@
                 <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
                     <div class="page-content">
                         <!-- Your content goes here -->
-                        <?php
-                        include("functions.php");
-                        include("uifunctions.php");
-                        include("dbForGreeley.php");
-                        //Add student to master schedule
-                        $class = "classtest";
-                        echoClassInfo($class);
-                        //createClass("classtest2", "testTeacher2", 2, "Test Description", 10);
-                        ?>
+                        <div class="mdl-grid">
+                            <div class="mdl-cell mdl-cell--5-col">
+                                <h3>Master Schedule:</h3>
+                                <a href='print.php'>Print</a>
+                                <?php
+                                include("uifunctions.php");
+                                masterSchedule();
+                                ?>
+                            </div>
+                            <div class="mdl-cell mdl-cell--2-col"></div>
+                            <div class="mdl-cell mdl-cell--5-col">
+                                <h3>Find a User's Schedule:</h3>
+                                <!-- Numeric Textfield -->
+                                <form action="masterPanel.php" method='get'>
+                                    <div class="mdl-textfield mdl-js-textfield">
+                                        <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="userSearchField" name='userSearchField'>
+                                        <label class="mdl-textfield__label" for="userSearchField">Enter the user ID</label>
+                                        <span class="mdl-textfield__error">Input is not a number!</span>
+                                    </div>
+                                    <!-- Colored icon button -->
+                                    <button type='submit' class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
+                                      <i class="material-icons">search</i>
+                                    </button>
+                                </form>
+                                <div>
+                                    <?php
+                                    include("uifunctions.php");
+                                    if(isset($_GET['userSearchField']))
+                                    {
+                                        $user_id = $_GET['userSearchField'];
+                                        echoStudentScheduleUI($user_id);
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </section>
                 <section class="mdl-layout__tab-panel" id="fixed-tab-2">
@@ -60,6 +88,19 @@
                 <section class="mdl-layout__tab-panel" id="fixed-tab-3">
                     <div class="page-content">
                         <!-- Your content goes here -->
+                        
+                    </div>
+                </section>
+                <section class="mdl-layout__tab-panel" id="fixed-tab-4">
+                    <div class="page-content">
+                        <!-- Your content goes here -->
+                        
+                    </div>
+                </section>
+                <section class="mdl-layout__tab-panel" id="fixed-tab-5">
+                    <div class="page-content">
+                        <!-- Your content goes here -->
+                        
                     </div>
                 </section>
             </main>
