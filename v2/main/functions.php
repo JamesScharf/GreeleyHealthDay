@@ -9,9 +9,10 @@
 
 
 //Check whether or not the class has been capped. Relies on countClassStudents($className)
-function isCapped($className, $numberInClass)
+function isCapped($className)
 {
     include("dbForGreeley.php");
+    $numberInClass = countClassStudents($className);
     $results = $mysqli->query("SELECT * FROM classInfo");  //Individual class info
     if($results)
     {
@@ -22,24 +23,20 @@ function isCapped($className, $numberInClass)
             if($className == $row['className'])
             {
                 $classCap = $row['classCap'];
-                //echo $classCap;
+                if($classCap == $numberInClass)
+                {
+                    return true; //Class is capped
+                }
+                else
+                {
+                    return false; //Class is not capped
+                }
             }
-
         }
     }
     else
     {
         echo "false";
-    }
-    
-
-    if($classCap == $numberInClass)
-    {
-        return true; //Class is capped
-    }
-    else
-    {
-        return false; //Class is not capped
     }
 }
 
@@ -77,7 +74,6 @@ function getUserPrivilege($user_id)
     $results = $mysqli->query("SELECT * FROM loginInfo");
     if($results)
     {
-        $classCounter = 0;
         for ($i = 0; $i < $results->num_rows; $i++)
         {
             $results->data_seek($i);
@@ -149,7 +145,6 @@ function canBeOnPage($user_id)
     $results = $mysqli->query("SELECT * FROM privilegeMap");
     if($results)
     {
-        $classCounter = 0;
         for ($i = 0; $i < $results->num_rows; $i++)
         {
             $results->data_seek($i);

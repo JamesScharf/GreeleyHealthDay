@@ -17,6 +17,10 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
+      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
   <body>
     <nav class="navbar navbar-inverse">
       <div class="container-fluid">
@@ -74,12 +78,11 @@
     
     <div class="container">
         <!--Page Content Div-->
+        <h2>Master Control Panel</h2>
+        <h6>Only users with a privilege level of 4 and above can access this section. You have access to all information and do anything here.</h6>
+        
+        </div>
         
     </div>
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
   </body>
 </html>

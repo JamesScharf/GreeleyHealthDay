@@ -1,7 +1,7 @@
 <?php
 /*Created by J. Scharf on 11/3
 *Version 2.0
-*Last Edited: 11/3
+*Last Edited: 11/16
 *
 *All of the user interface-related functions which hook up to their database-related functions
 */
@@ -12,12 +12,12 @@ function echoStudentScheduleUI($user_id)
     include("dbForGreeley.php");
     include("functions.php");
     echo "
-    <table class=''>
+    <table class='table table-striped table-hover '>
       <thead>
         <tr>
           <th>Time Slot</th>
-          <th class='mdl-data-table__cell--non-numeric'>Class</th>
-          <th class='mdl-data-table__cell--non-numeric'>Teacher</th>
+          <th>Class</th>
+          <th>Teacher</th>
         </tr>
       </thead>
       <tbody>";
@@ -37,8 +37,8 @@ function echoStudentScheduleUI($user_id)
                 echo "
                 <tr>
                   <td>$timeSlot</td>
-                  <td class='mdl-data-table__cell--non-numeric'>$class</td>
-                  <td class='mdl-data-table__cell--non-numeric'>$teacher</td>
+                  <td>$class</td>
+                  <td>$teacher</td>
                 </tr>";
             }
         }
@@ -48,17 +48,17 @@ function echoStudentScheduleUI($user_id)
 
 function masterSchedule()
 {
-    include("functions.php");
     include("dbForGreeley.php");
+    include("functions.php");
     echo "
-    <table class='mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp'>
+    <table class='table table-striped table-hover '>
       <thead>
         <tr>
           <th>Time Slot</th>
           <th>User ID</th>
-          <th class='mdl-data-table__cell--non-numeric'>Class Name</th>
-          <th class='mdl-data-table__cell--non-numeric'>Teacher</th>
-          <th class='mdl-data-table__cell--non-numeric'>Room</th>
+          <th>Class Name</th>
+          <th>Teacher</th>
+          <th>Room</th>
         </tr>
       </thead>
       <tbody>"; 
@@ -81,9 +81,9 @@ function masterSchedule()
             <tr>
               <td>$timeSlot</td>
               <td>$user_id</td>
-              <td class='mdl-data-table__cell--non-numeric'>$className</td>
-              <td class='mdl-data-table__cell--non-numeric'>$teacher</td>
-              <td class='mdl-data-table__cell--non-numeric'>$room</td>
+              <td>$className</td>
+              <td>$teacher</td>
+              <td>$room</td>
             </tr>"; 
         }
         echo "</tbody></table>";
@@ -94,6 +94,8 @@ function masterSchedule()
 function echoClassInfo($class)
 {
     //Get all of the info at first
+    include("dbForGreeley.php");
+    include("functions.php");
     $info1 = "class_id";
     $class_id = getClassInfo($class, $info1);
     $info2 = "className"; 
@@ -109,27 +111,65 @@ function echoClassInfo($class)
     
     //Now dump
     echo "
-    <table class='mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp'>
+    <table class='table table-striped table-hover '>
       <thead>
         <tr>
           <th>Class ID</th>
-          <th class='mdl-data-table__cell--non-numeric'>Class Name</th>
-          <th class='mdl-data-table__cell--non-numeric'>Class Teacher</th>
+          <th>Class Name</th>
+          <th>Class Teacher</th>
           <th>Class Slot</th>
-          <th class='mdl-data-table__cell--non-numeric'>Class Description</th>
+          <th>Class Description</th>
           <th>Class Cap</th>
         </tr>
       </thead>
       <tbody>
           <tr>
             <td>$class_id</td>
-            <td class='mdl-data-table__cell--non-numeric'>$className</td>
-            <td class='mdl-data-table__cell--non-numeric'>$classTeacher</td>
+            <td>$className</td>
+            <td>$classTeacher</td>
             <td>$classSlot</td>
-            <td class='mdl-data-table__cell--non-numeric'>$classDescription</td>
+            <td>$classDescription</td>
             <td>$classCap</td>
           </tr>
       </tbody></table>
       ";
+}
+
+
+//Echo a course card
+function echoCard($class)
+{
+    include("dbForGreeley.php");
+    include("functions.php");
+    $info1 = "class_id";
+    $class_id = getClassInfo($class, $info1);
+    $info2 = "classTeacher";
+    $classTeacher = getClassInfo($class, $info2);
+    $info3 = "classTime";
+    $classTime = getClassInfo($class, $info3);
+    $info4 = "classDescription";
+    $classDescription = getClassInfo($class, $info4);
+    $info5 = "classCap";
+    $classCap = getClassInfo($class, $info5);
+    $info6 = "classRoom";
+    $classRoom = getClassInfo($class, $info6);
+
+    echo "
+        <div class='panel panel-primary'>
+          <div class='panel-heading'>
+            <h3 class='panel-title'>$class</h3>
+          </div>
+          <div class='panel-body'>
+            <h6>Teacher:</h6>
+            <p>$classTeacher</p>
+            <h6>Description:</h6>
+            <p>$classDescription</p>
+            <h6>Cap:</h6>
+            <p>$classCap</p>
+            <h6>Room:</h6>
+            <p>$classRoom</p>
+          </div>
+        </div>
+    ";
 }
 ?>
