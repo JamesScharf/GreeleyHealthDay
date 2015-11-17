@@ -25,7 +25,6 @@
     <body>
         <?php
         include("dbForGreeley.php");
-        include("functions.php");
         include("uifunctions.php");
         
         $className = "classtest";
